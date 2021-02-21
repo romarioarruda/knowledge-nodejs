@@ -1,5 +1,5 @@
 module.exports = app => {
-    const { existsOrError, notExistsOrError, equalsOrError } = app.api.validation
+    const { existsOrError, notExistsOrError, equalsOrError, isIntOrError } = app.api.validation
 
     const save = (req, resp) => {
         const category = { ...req.body }
@@ -24,9 +24,45 @@ module.exports = app => {
     }
 
 
+    const withPath = categories => {
+        const getParent = (categories, parentId) => {
+            const parent = categories.filter(parent => parent.id === parentId)
+
+            return parent.length ? parent[0] : null
+        }
+
+        const categoriesWithPath = categories.map(category => {
+            let path = category.name
+            let parent = getParent(categories, category.parentId)
+
+            while(parent) {
+                path = `${parent.name} > ${path}`
+                parent = getParent(categories, parent.parentId)
+            }
+
+            return { ...category, path }
+        })
+
+        categoriesWithPath.sort((a, b) => {
+            if(a.path < b.path) return -1
+            if(a.path > b.path) return 1
+
+            return 0
+        })
+
+        return categoriesWithPath
+    }
+
+
     const get = (req, resp) => {
         app.db('categories').select('id', 'name', 'parentId')
-            .then(categories => resp.json(categories))
+            .then(categories => {
+                if(categories.length) {
+                    return resp.json(withPath(categories))
+                } else {
+                    return resp.json({ result: null })
+                }
+            })
             .catch(err => resp.status(500).send(err))
     }
 
@@ -50,6 +86,8 @@ module.exports = app => {
         try {
             existsOrError(req.params.id, 'Código da categoria não informado')
 
+            isIntOrError(req.params.id, 'Código da categoria deve ser um número inteiro')
+
             const subCategory = await app.db('categories').where({ parentId: req.params.id })
             notExistsOrError(subCategory, 'Categoria possui subcategorias')
 
@@ -65,5 +103,6 @@ module.exports = app => {
         }
     }
 
-    return { save, get, getOne }
+
+    return { save, remove, get, getOne }
 }

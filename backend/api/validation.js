@@ -20,8 +20,13 @@ function equalsOrError(valueA, valueB, msg) {
     if(valueA !== valueB) throw msg
 }
 
+function isIntOrError(value, msg) {
+    if(!parseInt(value)) throw msg
+}
+
 module.exports = {
     existsOrError,
     notExistsOrError,
-    equalsOrError
+    equalsOrError,
+    isIntOrError
 }
