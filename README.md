@@ -26,3 +26,10 @@ Tecnologias usadas no projeto:
 * Vuex
 * Axios
 * Highlight.js
+
+
+## Sobre o projeto
+
+O sistema é uma especie de blog/fórum de conhecimentos. Onde é possível publicar posts, dividir por categorias e subcategorias.
+
+O sistema foi desenvolvido no curso de web moderno da Cod3r[https://www.cod3r.com.br/].
