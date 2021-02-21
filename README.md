@@ -30,6 +30,6 @@ Tecnologias usadas no projeto:
 
 ## Sobre o projeto
 
-O sistema é uma especie de blog/fórum de conhecimentos. Onde é possível publicar posts, dividir por categorias e subcategorias.
+O sistema é um blog/fórum de conhecimentos. Onde é possível publicar posts, dividir por categorias e subcategorias, pesquisar por conteúdos etc..
 
 O sistema foi desenvolvido no curso de web moderno da [Cod3r](https://www.cod3r.com.br/).
