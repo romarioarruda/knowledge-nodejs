@@ -1,6 +1,6 @@
 # knowledge-nodejs
 
-Projeto para desafio da Nextar, a fim de consolidar minha experiência com Node.js.
+Projeto para desafio a fim de consolidar/edificar minha experiência com Node.js.
 
 Tecnologias usadas no projeto:
 
