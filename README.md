@@ -1,6 +1,6 @@
 # knowledge-nodejs
 
-Projeto para consolidar conhecimento em ambiente Node.js
+Projeto para desafio da Nextar, a fim de consolidar minha experiência com Node.js.
 
 Tecnologias usadas no projeto:
 
@@ -30,6 +30,6 @@ Tecnologias usadas no projeto:
 
 ## Sobre o projeto
 
-O sistema é um blog/fórum de conhecimentos. Onde é possível publicar posts, dividir por categorias e subcategorias, pesquisar por conteúdos etc..
+O sistema é uma plataforma/fórum de conhecimentos. Onde é possível publicar posts, dividir por categorias e subcategorias, pesquisar por conteúdos etc..
 
 Os usuários podem ser cadastrados com níveis de acesso, como admin ou não.
