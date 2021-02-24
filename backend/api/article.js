@@ -1,3 +1,5 @@
+const queries = require('./queries')
+
 module.exports = app => {
     const { existsOrError, notExistsOrError, isIntOrError } = app.api.validation
 
@@ -72,5 +74,24 @@ module.exports = app => {
             .catch(err => resp.status(500).send(err))
     }
 
-    return { save, remove, get, getOne }
+
+    const getByCategory = async (req, resp) => {
+        if(!parseInt(req.params.id)) return resp.send('Parâmetro inválido')
+
+        const categoryId = req.params.id
+        const page = req.query.page || 1
+        const categories = await app.db.raw(queries.categoryWithChildren, categoryId)
+        const ids = categories.rows.map(cat => cat.id)
+
+        app.db({a: 'articles', u: 'users'})
+            .select('a.id', 'a.name', 'a.description', 'a.imageUrl', { author: 'u.name' })
+            .limit(limit).offset(page * limit - limit)
+            .whereRaw('?? = ??', ['u.id', 'a.userId'])
+            .whereIn('categoryId', ids)
+            .orderBy('a.id', 'desc')
+            .then(articles => resp.json(articles))
+            .catch(err => resp.status(500).send(err))
+    }
+
+    return { save, remove, get, getOne, getByCategory }
 }
