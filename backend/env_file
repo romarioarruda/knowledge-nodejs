@@ -1,3 +1,10 @@
 module.exports = {
-    authSecret: ''
+    authSecret: '',
+    db: {
+        host: 'name_host',
+        port: port,
+        database: 'name_database',
+        user: 'user_name',
+        password: 'user_pass'
+    }
 }
