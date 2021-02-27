@@ -1,10 +1,13 @@
 <template>
-    <nav class="menu"></nav>
+    <nav class="menu" v-show="menuIsVisible"></nav>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
-    name: 'Menu'
+    name: 'Menu',
+    computed: mapState(['menuIsVisible'])
 }
 </script>
 
