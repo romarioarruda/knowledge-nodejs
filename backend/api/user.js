@@ -46,7 +46,7 @@ module.exports = app => {
     }
 
     const get = (req, resp) => {
-        app.db('users').select('id', 'name', 'email', 'admin')
+        app.db('users').select('id', 'name', 'email', 'admin', 'deletedAt').whereNull('deletedAt')
             .then(users => resp.json(users))
             .catch(err => resp.status(500).send(err))
     }
@@ -54,7 +54,8 @@ module.exports = app => {
     const getOne = (req, resp) => {
         if(!parseInt(req.params.id)) return resp.send('Parâmetro inválido.')
 
-        app.db('users').select('id', 'name', 'email', 'admin').where({ id: req.params.id })
+        app.db('users').select('id', 'name', 'email', 'admin', 'deletedAt')
+            .where({ id: req.params.id }).whereNull('deletedAt')
             .then(user => {
                 if(user.length) {
                     return resp.json(user)
@@ -65,5 +66,24 @@ module.exports = app => {
             .catch(err => resp.status(500).send(err))
     }
 
-    return { save, get, getOne }
+    const remove = async (req, resp) => {
+        try {
+            const articles = await app.db('articles')
+                .where({ userId: req.params.id })
+            notExistsOrError(articles, 'Usuário possui artigos.')
+
+            const rowsUpdated = await app.db('users')
+                .update({ deletedAt: new Date() })
+                .where({ id: req.params.id })
+
+            existsOrError(rowsUpdated, 'Usuário não encontrado.')
+
+            resp.status(204).send()
+
+        } catch(msg) {
+            resp.status(400).send(msg)
+        }
+    }
+
+    return { save, get, getOne, remove }
 }
