@@ -5,7 +5,11 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
     state: {
-        menuIsVisible: true
+        menuIsVisible: true,
+        user: {
+            name: 'Usuário mock',
+            email: 'mock@email.com'
+        }
     },
     mutations: {
         toggleMenu(state, isVisible) {
