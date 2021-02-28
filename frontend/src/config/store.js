@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
     state: {
-        menuIsVisible: true,
+        menuIsVisible: false,
         user: {
             name: 'Usuário mock',
             email: 'mock@email.com'

@@ -1,5 +1,5 @@
 <template>
-    <nav class="menu" v-show="menuIsVisible"></nav>
+    <aside class="menu" v-show="menuIsVisible"></aside>
 </template>
 
 <script>
