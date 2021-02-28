@@ -14,9 +14,8 @@
                 </b-col>
                 <b-col xs="12">
                     <b-form-group label="Categoria Pai:" label-for="category-parentId">
-                        <b-form-select id="category-parentId"
+                        <b-form-select id="category-parentId" :disabled="mode === 'remove'"
                             :options="categories" v-model="category.parentId">
-                            
                         </b-form-select>
                     </b-form-group>
                 </b-col>
