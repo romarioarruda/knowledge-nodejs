@@ -35,9 +35,6 @@ module.exports = app => {
     app.route('/category/:id')
         .all(app.config.passport.authenticate())
         .put(admin(app.api.category.save))
-
-    app.route('/category/:id')
-        .all(app.config.passport.authenticate())
         .delete(admin(app.api.category.remove))
 
     app.route('/articles')
