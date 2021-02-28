@@ -1,0 +1,44 @@
+<template>
+    <div>
+        <PageTitle icon="fa fa-home" main="Dashboard" sub="Base de conhecimento"/>
+        <div class="stats">
+            <Stat title="Categorias" :value="stat.categories" icon="fa fa-folder" color="#d54d50"/>
+            <Stat title="Artigos" :value="stat.articles" icon="fa fa-file" color="#3bc480"/>
+            <Stat title="Usuários" :value="stat.users" icon="fa fa-user" color="#3282cd"/>
+        </div>
+    </div>
+</template>
+
+<script>
+import PageTitle from '@/components/template/PageTitle'
+import Stat from './Stat'
+import axios from 'axios'
+import { baseUrlApi } from '@/global'
+
+export default {
+    name: "Home",
+    components: { PageTitle, Stat },
+    data() {
+        return {
+            stat: {}
+        }
+    },
+    mounted() {
+        this.getStats()
+    },
+    methods: {
+        getStats() {
+            axios.defaults.headers.authorization = 'bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwibmFtZSI6IlJvbcOhcmlvIEFycnVkYSIsImVtYWlsIjoicm9tYXJpb0BnbWFpbC5jb20iLCJhZG1pbiI6dHJ1ZSwiaWF0IjoxNjE0NTI3NDU2LCJleHAiOjE2MTQ2MTM4NTZ9.MlHPQ-VinpUaMEfppjH4NMyyfQj3BobudleLZpe24bw'
+            axios.get(`${baseUrlApi}/stats`).then(resp => this.stat = resp.data)
+        }
+    }
+}
+</script>
+
+<style>
+    .stats {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+</style>
