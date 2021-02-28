@@ -48,7 +48,7 @@ module.exports = app => {
     }
 
     const get = (req, resp) => {
-        app.db('users').select('id', 'name', 'email', 'admin', 'deletedAt').whereNull('deletedAt')
+        app.db('users').select('id', 'name', 'email', 'admin').whereNull('deletedAt')
             .then(users => resp.json(users))
             .catch(err => resp.status(500).send(err))
     }
@@ -56,7 +56,7 @@ module.exports = app => {
     const getOne = (req, resp) => {
         if(!parseInt(req.params.id)) return resp.send('Parâmetro inválido.')
 
-        app.db('users').select('id', 'name', 'email', 'admin', 'deletedAt')
+        app.db('users').select('id', 'name', 'email', 'admin')
             .where({ id: req.params.id }).whereNull('deletedAt')
             .then(user => {
                 if(user.length) {
