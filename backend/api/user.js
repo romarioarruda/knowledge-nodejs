@@ -49,7 +49,7 @@ module.exports = app => {
 
     const get = async (req, resp) => {
         if (req.query.page) {
-            const limit = 1
+            const limit = 10
             const page = req.query.page || 1
 
             const result = await app.db('users').count('id').whereNull('deletedAt').first()
