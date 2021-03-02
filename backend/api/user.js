@@ -47,10 +47,24 @@ module.exports = app => {
         }
     }
 
-    const get = (req, resp) => {
-        app.db('users').select('id', 'name', 'email', 'admin').whereNull('deletedAt')
-            .then(users => resp.json(users))
-            .catch(err => resp.status(500).send(err))
+    const get = async (req, resp) => {
+        if (req.query.page) {
+            const limit = 1
+            const page = req.query.page || 1
+
+            const result = await app.db('users').count('id').whereNull('deletedAt').first()
+            const count = parseInt(result.count)
+
+            app.db('users')
+                .select('id', 'name', 'email', 'admin')
+                .whereNull('deletedAt')
+                .limit(limit).offset(page * limit - limit)
+                .then(users => resp.json({ data: users, count, limit }))
+        } else {
+            app.db('users').select('id', 'name', 'email', 'admin').whereNull('deletedAt')
+                .then(users => resp.json(users))
+                .catch(err => resp.status(500).send(err))
+        }
     }
 
     const getOne = (req, resp) => {

@@ -60,6 +60,15 @@
                 </b-button>
             </template>
         </b-table>
+        <b-pagination size="md"
+            first-text="⏮"
+            prev-text="⏪"
+            next-text="⏩"
+            last-text="⏭"
+            v-model="page"
+            :total-rows="count"
+            :per-page="limit"
+        />
     </div>
 </template>
 
@@ -74,6 +83,9 @@ export default {
             mode: 'save',
             user: {},
             users: [],
+            page: 1,
+            count: 0,
+            limit: 0,
             fields: [
                 { key: 'id', label: 'Código', sortable: true},
                 { key: 'name', label: 'Nome', sortable: true},
@@ -90,8 +102,12 @@ export default {
     },
     methods: {
         loadUsers() {
-            const url = `${baseUrlApi}/users`
-            axios.get(url).then(resp => this.users = resp.data)
+            const url = `${baseUrlApi}/users?page=${this.page}`
+            axios.get(url).then(resp => {
+                this.users = resp.data.data
+                this.count = resp.data.count
+                this.limit = resp.data.limit
+            })
         },
 
         reset() {
@@ -126,6 +142,11 @@ export default {
         loadUser(user, mode = 'save') {
             this.mode = mode
             this.user = { ...user }
+        }
+    },
+    watch: {
+        page() {
+            this.loadUsers()
         }
     }
 }
