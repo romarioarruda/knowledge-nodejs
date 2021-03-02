@@ -34,6 +34,15 @@
                 </b-button>
             </template>
         </b-table>
+        <b-pagination size="md"
+            first-text="⏮"
+            prev-text="⏪"
+            next-text="⏩"
+            last-text="⏭"
+            v-model="page"
+            :total-rows="count"
+            :per-page="limit"
+        />
     </div>
 </template>
 
@@ -48,6 +57,9 @@ export default {
             mode: 'save',
             category: {},
             categories: [],
+            page: 1,
+            count: 0,
+            limit: 0,
             fields: [
                 { key: 'id', label: 'Código', sortable: true},
                 { key: 'name', label: 'Nome', sortable: true},
@@ -61,9 +73,11 @@ export default {
     },
     methods: {
         loadCategories() {
-            const url = `${baseUrlApi}/categories`
+            const url = `${baseUrlApi}/categories?page=${this.page}`
             axios.get(url).then(resp => {
-                this.categories = resp.data.map(category => {
+                this.categories = resp.data.data.map(category => {
+                    this.limit = resp.data.limit
+                    this.count = resp.data.count
                     return { ...category, value: category.id, text: category.path }
                 })
             })
@@ -105,6 +119,11 @@ export default {
                 name: category.name,
                 parentId: category.parentId
             }
+        }
+    },
+    watch: {
+        page() {
+            this.loadCategories()
         }
     }
 }

@@ -54,16 +54,23 @@ module.exports = app => {
     }
 
 
-    const get = (req, resp) => {
-        app.db('categories').select('id', 'name', 'parentId')
-            .then(categories => {
-                if(categories.length) {
-                    return resp.json(withPath(categories))
-                } else {
-                    return resp.json({ result: null })
-                }
-            })
-            .catch(err => resp.status(500).send(err))
+    const get = async (req, resp) => {
+        if (req.query.page) {
+            const limit = 10
+            const page = req.query.page || 1
+
+            const result = await app.db('categories').count('id').first()
+            const count = parseInt(result.count)
+
+            app.db('categories')
+                .select('id', 'name', 'parentId')
+                .limit(limit).offset(page * limit - limit)
+                .then(categories => resp.json({ data: categories, count, limit }))
+        } else {
+            app.db('categories').select('id', 'name', 'parentId')
+                .then(categories => resp.json(withPath(categories)))
+                .catch(err => resp.status(500).send(err))
+        }
     }
 
 
@@ -71,13 +78,7 @@ module.exports = app => {
         if(!parseInt(req.params.id)) return resp.send('Parâmetro inválido')
 
         app.db('categories').select('id', 'name', 'parentId').where({ id: req.params.id })
-            .then(category => {
-                if(category.length) {
-                    return resp.json(category)
-                } else {
-                    return resp.json({ result: null })
-                }
-            })
+            .then(category => resp.json(category))
             .catch(err => resp.status(500).send(err))
     }
 
