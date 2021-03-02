@@ -95,7 +95,7 @@ export default {
         this.loadUsers()
     },
     methods: {
-        loadArticles(page) {
+        loadArticles() {
             const url = `${baseUrlApi}/articles?page=${this.page}`
 
             axios.get(url).then(resp => {
@@ -161,7 +161,7 @@ export default {
     },
     watch: {
         page() {
-            this.loadArticles(this.page)
+            this.loadArticles()
         }
     }
 }
