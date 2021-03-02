@@ -72,13 +72,7 @@ module.exports = app => {
 
         app.db('users').select('id', 'name', 'email', 'admin')
             .where({ id: req.params.id }).whereNull('deletedAt')
-            .then(user => {
-                if(user.length) {
-                    return resp.json(user)
-                } else {
-                    return resp.json({ result: null })
-                }
-            })
+            .then(user => resp.json(user))
             .catch(err => resp.status(500).send(err))
     }
 
