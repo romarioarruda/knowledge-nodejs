@@ -54,6 +54,17 @@ export default {
                 if(resp.data.length === 0) this.loadMore = false
             })
         }
+    },
+    watch: {
+        $route(to) {
+            this.category.id = to.params.id
+            this.articles = []
+            this.page = 1
+            this.loadMore = true
+
+            this.getCategory()
+            this.getArticles()
+        }
     }
 }
 </script>

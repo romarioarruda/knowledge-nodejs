@@ -28,10 +28,20 @@ export default {
             }
         }
     },
+    mounted() {
+        this.$refs.tree.$on('node:selected', this.onNodeSelect)
+    },
     methods: {
         getTreeData() {
             const url = `${baseUrlApi}/categories/tree`
             return axios.get(url).then(resp => resp.data)
+        },
+
+        onNodeSelect(node) {
+            this.$router.push({
+                name: "ArticlesByCategory",
+                params: { id: node.id }
+            })
         }
     },
     computed: mapState(['menuIsVisible']),
