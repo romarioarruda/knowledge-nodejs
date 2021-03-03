@@ -65,7 +65,7 @@ module.exports = app => {
             app.db('categories')
                 .select('id', 'name', 'parentId')
                 .limit(limit).offset(page * limit - limit)
-                .then(categories => resp.json({ data: categories, count, limit }))
+                .then(categories => resp.json({ data: withPath(categories), count, limit }))
         } else {
             app.db('categories').select('id', 'name', 'parentId')
                 .then(categories => resp.json(withPath(categories)))
