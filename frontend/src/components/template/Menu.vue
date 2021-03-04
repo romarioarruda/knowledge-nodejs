@@ -42,6 +42,14 @@ export default {
                 name: "ArticlesByCategory",
                 params: { id: node.id }
             })
+
+            this.hideMenuScreenSm()
+        },
+
+        hideMenuScreenSm() {
+            if (this.$mq === 'xs' || this.$mq === 'sm') {
+                this.$store.commit('toggleMenu', false)
+            }
         }
     },
     computed: mapState(['menuIsVisible']),
