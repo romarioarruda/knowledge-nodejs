@@ -1,7 +1,5 @@
 # knowledge-nodejs
 
-Projeto para desafio a fim de consolidar/edificar minha experiência com Node.js.
-
 Tecnologias usadas no projeto:
 
 #### Backend:
@@ -36,12 +34,12 @@ Tecnologias usadas no projeto:
 
 ## Sobre o projeto
 
-O sistema é uma plataforma para publicar artigos. O usuário se cadastra, faz o login e acessa os artigos já publicados e também publica novos artigos.
+O sistema é uma plataforma para publicar e consumir artigos. O usuário se cadastra, faz o login e acessa os artigos já publicados e também publica novos artigos.
 
 Os usuários podem ser cadastrados com níveis de acesso, como admin ou não. Por padrão, o usuário não é admin, requerendo que outro de nível admin lhe dê
 esse privilégio.
 
-## Rodando o app localmente
+## Rodando a aplicação localmente
 
 Garanta que o MongoDB e PostgreSql estejam instalados.
 
@@ -58,6 +56,9 @@ Feito isso, execute o backend `npm start`, frontend `npm run serve`
 
 e garanta que o mongoDB e PostgreSql estejam rodando também.
 
+A base de dados será migrada automaticamente ao executar o backend.
+
+Pra rodar o mongo:
 `sudo mongod ou sudo mongod --dbpath=data/db`
 
 Acesse o frontend em:
