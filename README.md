@@ -44,10 +44,9 @@ Na pasta backend, renomeie o arquivo `env_file` para `.env`.
 Nesse caso, o usuário padrão do postgres é `postgres` e a senha por padrão é vazia. Se necessário, altere.
 
 Em seguida, atualize as dependências do Node nas pastas backend e frontend:
-`cd backend && npm i
+`cd backend && npm i`
 
-cd frontend && npm i
-`
+`cd frontend && npm i`
 
 Feito isso, execute o backend `npm start`, frontend `npm run serve`
 
