@@ -35,7 +35,7 @@ O sistema é uma plataforma para publicar artigos. O usuário se cadastra, faz o
 Os usuários podem ser cadastrados com níveis de acesso, como admin ou não. Por padrão, o usuário não é admin, requerendo que outro de nível admin lhe dê
 esse privilégio.
 
-# Rodando localmente
+## Rodando o app localmente
 
 Garanta que o MongoDB e PostgreSql estejam instalados.
 
