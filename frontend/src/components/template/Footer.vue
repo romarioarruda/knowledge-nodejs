@@ -1,7 +1,10 @@
 <template>
     <div class="footer">
         <span>Copyright 
-            <strong id="boss">Romário Arruda</strong>
+            <strong id="boss">
+                <a target="_blank" rel="noopener noreferrer"
+                    href="https://github.com/romarioarruda/knowledge-nodejs">Romário Arruda</a>
+            </strong>
             &copy; {{ new Date().getFullYear() }}
         </span>
     </div>

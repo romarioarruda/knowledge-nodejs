@@ -3,7 +3,7 @@
       <a class="toggle" @click="toggleMenu" v-if="!hideToggle">
           <i class="fa fa-lg" :class="icon"></i>
       </a>
-      <h1 class="title">
+      <h1 class="title" v-if="hasUser">
           <i class="fa fa-home"></i>
           <router-link to="/">{{title}}</router-link>
       </h1>
@@ -30,6 +30,10 @@ export default {
     computed: {
         icon () {
             return this.$store.state.menuIsVisible ? 'fa-angle-left' : 'fa-angle-down'
+        },
+
+        hasUser() {
+            return this.$store.state.user
         }
     }
 }

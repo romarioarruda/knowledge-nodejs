@@ -11,8 +11,8 @@
             <input v-if="showSignup" type="password" class="form-control"
                 v-model="user.confirmPassword" placeholder="Confirme a senha" />
 
-            <button v-if="showSignup" @click="signup" class="btn btn-outline-primary mb-3">Registrar</button>
-            <button v-else @click="signin" class="btn btn-outline-primary mb-3">Entrar</button>
+            <button v-if="showSignup" @click="signup" block class="btn btn-outline-primary mb-3">Registrar</button>
+            <button v-else @click="signin" block class="btn btn-outline-primary mb-3">Entrar</button>
 
             <a href @click.prevent="showSignup = !showSignup">
                 <span v-if="showSignup">Já tem cadastro? Acesse o Login!</span>
