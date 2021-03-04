@@ -18,6 +18,8 @@ Tecnologias usadas no projeto:
 * Postgresql
 * MongoDB
 * Cors
+* JWT-Simple
+* Bcrypt-Nodejs
 
 #### Frontend:
 
