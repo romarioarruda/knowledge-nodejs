@@ -17,15 +17,19 @@ Tecnologias usadas no projeto:
 * Consign
 * Postgresql
 * MongoDB
+* Cors
 
 #### Frontend:
 
 * Vue.js
 * Bootstrap-vue
 * Vue-router
+* Vue-toasted
 * Vuex
 * Axios
 * Highlight.js
+* Liquor-tree
+* Font-awesome
 
 
 ## Sobre o projeto
