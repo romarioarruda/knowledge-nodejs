@@ -54,3 +54,8 @@ e garanta que o mongoDB e PostgreSql estejam rodando também.
 
 `sudo mongod ou sudo mongod --dbpath=data/db`
 
+Acesse o frontend em:
+`http://localhost:8080/`
+
+O backend roda na porta `3000`
+
