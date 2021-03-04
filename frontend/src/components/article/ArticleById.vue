@@ -6,6 +6,8 @@
 </template>
 
 <script>
+import 'highlightjs/styles/dracula.css'
+import highlight from 'highlightjs/highlight.pack'
 import { baseUrlApi } from '@/global'
 import axios from 'axios'
 import PageTitle from '@/components/template/PageTitle'
@@ -21,6 +23,11 @@ export default {
     mounted() {
         const url = `${baseUrlApi}/articles/${this.$route.params.id}`
         axios.get(url).then(resp => this.article = resp.data)
+    },
+    updated() {
+        document.querySelectorAll('.article-content pre').forEach(e => {
+            highlight.highlightBlock(e)
+        })
     }
 }
 </script>

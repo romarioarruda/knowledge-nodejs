@@ -50,7 +50,7 @@ router.beforeEach((to, from, next) => {
 
     if(to.matched.some(record => record.meta.requiresAdmin)) {
         const user = JSON.parse(json)
-        user && user.admin ? next() : next({ name: '/' })
+        user && user.admin ? next() : next({ name: '' })
     } else {
         next()
     }
