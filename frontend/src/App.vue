@@ -51,11 +51,15 @@ export default {
 				return this.$router.push({ name: 'Auth' })
 			}
 
-			const authUser = await axios.post(`${baseUrlApi}/validateToken`, userData)
-
-			if(authUser.data) {
-				this.$store.commit('setUSer', userData)
-			} else {
+			try {
+				const authUser = await axios.post(`${baseUrlApi}/validateToken`, userData)
+				if(authUser.data) {
+					this.$store.commit('setUSer', userData)
+				} else {
+					localStorage.removeItem(userKey)
+					this.$router.push({ name: 'Auth' })
+				}
+			} catch(err) {
 				localStorage.removeItem(userKey)
 				this.$router.push({ name: 'Auth' })
 			}
