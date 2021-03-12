@@ -52,11 +52,14 @@ Em seguida, atualize as dependências do Node nas pastas backend e frontend:
 
 `cd frontend && npm i`
 
+## Crie o banco de dados no Postgres
+`CREATA DATABASE knowledge_final;`
+
+Garanta que o mongoDB e PostgreSql estejam rodando também.
+
 Feito isso, execute o backend `npm start`, frontend `npm run serve`
 
-e garanta que o mongoDB e PostgreSql estejam rodando também.
-
-A base de dados será migrada automaticamente ao executar o backend.
+As tabelas da base de dados serão migradas automaticamente ao executar o backend.
 
 Pra rodar o mongo:
 `sudo mongod ou sudo mongod --dbpath=data/db`
